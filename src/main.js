@@ -41,6 +41,7 @@ Formsy.Form = React.createClass({
       onInvalid: function () {},
       onChange: function () {},
       validationErrors: null,
+      validateOnMount: true, // avoid break change
       preventExternalInvalidation: false
     };
   },
@@ -69,7 +70,9 @@ Formsy.Form = React.createClass({
   },
 
   componentDidMount: function () {
-    this.validateForm();
+    if (this.props.validateOnMount) {
+      this.validateForm();
+    }
   },
 
   componentWillUpdate: function () {
@@ -407,7 +410,9 @@ Formsy.Form = React.createClass({
       this.inputs.push(component);
     }
 
-    this.validate(component);
+    if (this.props.validateOnMount) {
+      this.validate(component);
+    }
   },
 
   // Method put on each input component to unregister
