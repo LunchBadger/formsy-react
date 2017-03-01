@@ -425,7 +425,9 @@ Formsy.Form = React.createClass({
         .concat(this.inputs.slice(componentPos + 1));
     }
 
-    this.validateForm();
+    if (this.props.validateOnMount) {
+      this.validateForm();
+    }
   },
   render: function () {
     var {
